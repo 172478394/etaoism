@@ -2,6 +2,8 @@
 namespace gclinux\etaoism;
 use gclinux\etaoism\Paipan;
 class StarsCheck{
+	// 是否考虑早晚子时,考虑早晚子时以0时划分天,否则以23时划分(子时划分)
+	$public $zwz = true; 
 	/**	
 	 * 空亡,在Paipan类里已经实现了
 	 */
@@ -1201,7 +1203,7 @@ class StarsCheck{
 	 */
 	public function shiLing($info,&$star,$key,$value){
 		$map = [
-			'0-8','1-9','2-0','3-1','4-6','5-1','6-2','7-3','8-6','9-7'
+			'0-4','1-5','2-8','3-10','4-6','5-1','6-4','7-5','8-8','9-11'
 		];
 		$find = $info['tg'][2].'-'.$info['dz'][2];
 		if(in_array($find,$map)){
@@ -1304,12 +1306,13 @@ class Stars{
 	 * @param int $hh 时间(0-23)
 	 * @param int $mt 分钟数(0-59),在跨节的时辰上会需要,有的排盘忽略了跨节
 	 * @param int $ss 秒数(0-59)
+	 * @param bool $zwz 是否考虑早晚子时
 	 * @return array
 	 */
-	public function getInfo($gd, $yy, $mm, $dd, $hh, $mt=0, $ss=0){
-
+	public function getInfo($gd, $yy, $mm, $dd, $hh, $mt=0, $ss=0, $zwz=true){
+		
 		$paiPan = new Paipan;
-		$info = $paiPan->getInfo($gd, $yy, $mm, $dd, $hh, $mt, $ss);
+		$info = $paiPan->getInfo($gd, $yy, $mm, $dd, $hh, $mt, $ss, $zwz);
 		return $this->getStars($info);
 		
 	}

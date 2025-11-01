@@ -1210,9 +1210,11 @@ class Paipan{
 	 * @param int $hh 时间(0-23)
 	 * @param int $mt 分钟数(0-59),在跨节的时辰上会需要,有的排盘忽略了跨节
 	 * @param int $ss 秒数(0-59)
+	 * @param bool $zwz 是否计算早晚子时
 	 * @return array
 	 */
-	public function GetInfo($gd, $yy, $mm, $dd, $hh, $mt=0, $ss=0){
+	public function GetInfo($gd, $yy, $mm, $dd, $hh, $mt=0, $ss=0,$zwz=true){
+		$this->zwz = $zwz;
 	    if(!in_array($gd, [0,1])){
 	        return [];
 	    }

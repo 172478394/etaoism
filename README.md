@@ -95,6 +95,8 @@ composer require gclinux/etaoism
 
    \* @param int $ss 秒数(0-59)
 
+   \* @param bool $zwz  是否使用早晚子时,默认为真(个人经验为真更准)
+
    \* @return array
 
 
@@ -383,3 +385,4 @@ tg: [//天干
 	},
 	],
 }```
+```
