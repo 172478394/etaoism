@@ -429,35 +429,51 @@ class StarsCheck{
 	public function wenChang($info,&$star,$key,$value){
 		$tg = $info['tg'];
 		$dz = $info['dz'];
-		$find = false;
+		$finds = [];
 		if($tg[2] == 0 or $tg[0] == 0 ){
-			$find = 5;
-		}elseif($tg[2] == 1 or $tg[0] == 1 ){
-			$find=6;
-		}elseif($tg[2] == 2 or $tg[0] == 2 ){
-			$find=8;
-		}elseif($tg[2] == 3 or $tg[0] == 3 ){
-			$find = 9;
-		}elseif($tg[2] == 4 or $tg[0] == 4 ){
-			$find = 8;
-		}elseif($tg[2] == 5 or $tg[0] == 5 ){
-			$find = 9;
-		}elseif($tg[2] == 6 or $tg[0] == 6 ){
-			$find=11;
-		}elseif($tg[2] == 7 or $tg[0] == 7 ){
-			$find = 0;
-		}elseif($tg[2] == 8 or $tg[0] == 8 ){
-			$find = 2;
-		}elseif($tg[2] == 9 or $tg[0] == 9 ){
-			$find = 3;
+			$finds[] = 5;
 		}
-		if($find !== false){
+		if($tg[2] == 1 or $tg[0] == 1 ){
+			$finds[]=6;
+		}
+		if($tg[2] == 2 or $tg[0] == 2 ){
+			$finds[]=8;
+		}
+		if($tg[2] == 3 or $tg[0] == 3 ){
+			$finds[] = 9;
+		}
+		if($tg[2] == 4 or $tg[0] == 4 ){
+			$finds[] = 8;
+		}
+		if($tg[2] == 5 or $tg[0] == 5 ){
+			$finds[] = 9;
+		}
+		if($tg[2] == 6 or $tg[0] == 6 ){
+			$finds[]=11;
+		}
+		if($tg[2] == 7 or $tg[0] == 7 ){
+			$finds[] = 0;
+		}
+		if($tg[2] == 8 or $tg[0] == 8 ){
+			$finds[] = 2;
+		}
+		if($tg[2] == 9 or $tg[0] == 9 ){
+			$finds[] = 3;
+		}
+		if(empty($finds)){
+			return;
+		}
+		// dump($finds);
+		foreach($finds as $find){
+			
 			for($i = 0;$i<4;$i++){
 				if($dz[$i] == $find){
 					$star[$i][$key] = $value;
 				}
 			}
+			
 		}
+		
 	}
 
 	/**
@@ -523,13 +539,13 @@ class StarsCheck{
 			$find[] = 11;
 		}
 		if($tg[2] == 6 or $tg[0] == 6 ){
-			$find=[6];
+			$find[] = 6;
 		}
 		if($tg[2] == 7 or $tg[0] == 7 ){
-			$find=[5];
+			$find[] = 5;
 		}
 		if($tg[2] == 8 or $tg[0] == 8 ){
-			$find=[4];
+			$find[] =4;
 		}
 		if(count($find)){
 			for($i = 0;$i<4;$i++){
@@ -1137,6 +1153,12 @@ class StarsCheck{
 
 	/**
 	 * 天喜
+	 * ⿏年见兔为红鸾，见鸡为天喜；⽜年见虎为红鸾，见猴为天喜。
+	 * 虎年见⽜为红鸾，见⽺为天喜；兔年见⿏为红鸾，见马为天喜
+	 * 龙年见猪为红鸾，见蛇为天喜；蛇年见狗为红鸾，见龙为天喜
+	 * 马年见鸡为红鸾，见兔为天喜；⽺年见猴为红鸾，见虎为天喜
+	 * 猴年见⽺为红鸾，见⽜为天喜；鸡年见马为红鸾，见⿏为天喜
+	 * 狗年见蛇为红鸾，见猪为天喜；猪年见龙为红鸾，见狗为天喜
 	 */
 	public function tianXi($info,&$star,$key,$value){
 		//$map = [9,8,7,6,5,4,3,2,1,0,11,10];
@@ -1215,7 +1237,7 @@ class StarsCheck{
 	 */
 	public function shiE($info,&$star,$key,$value){
 		$map = [
-			'0-8','1-9','2-0','3-1','4-6','5-1','6-2','7-3','8-6','9-7'
+			'0-4','1-5','2-8','3-10','4-6','5-1','6-4','7-5','8-8','9-11'
 		];
 		$find = $info['tg'][2].'-'.$info['dz'][2];
 		if(in_array($find,$map)){
@@ -1274,7 +1296,7 @@ class Stars{
         ['ciGuan','词馆'],
         ['hongLian','红鸾'],
         ['tianXi','天喜'],
-        ['taoHua','桃花'],
+        ['taoHua','桃花(咸池)'],
         ['ganLu','干禄'],
         ['shiLing','十灵'],//甲申、乙酉、丙子、丁丑、戊午、己丑、庚寅、辛卯、壬午、癸未日
 		['shiE','十恶大败'],
